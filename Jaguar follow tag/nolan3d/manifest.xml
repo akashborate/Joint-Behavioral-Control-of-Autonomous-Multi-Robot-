@@ -1,0 +1,21 @@
+<package>
+  <description brief="nolan3d">
+
+     nolan3d
+
+  </description>
+  <author>Akash Borate</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/nolan3d</url>
+  
+  <depend package="roscpp"/>
+  <depend package="rospy"/>
+  <depend package="ar_recog"/>
+  <depend package="std_msgs"/>
+  <depend package="geometry_msgs"/>
+ 
+
+</package>
+
+

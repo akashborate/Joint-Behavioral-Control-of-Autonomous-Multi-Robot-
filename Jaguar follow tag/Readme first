@@ -1,0 +1,43 @@
+Steps:
+1.) Download from the zipfile: DrRobotMotionSensorDriver and drrobot_jaguar4x4_player packages along with the dependencies erratic_robot and joy if needed.
+
+2.) Download gscam package from the zip file or git hub. 
+
+3.) Download the ar_recog package from the zip file.
+
+4.) Follow the instructions given in the link http://brown-robotics.org/index.php?title=CS148_Assignment_Object_Seeking#Introduction to get 
+used too gscam and ar_recog.
+
+5.) Download nolan package from the zip file.
+
+6.) After downloading each package 
+	$ rosmake --pre-clean 
+    into each package folder to compile it to ROS and satisfy all dependencies by checking
+	$ rosdep check [pacakage name].
+
+After above packages are downloaded start by doing below steps:
+1.) Make sure a camera is connected to usb port on the system. Check the port camera is connected too by 
+    $ ls /dev/video*
+2.) Default video input for system web camera is video0, for the external camera it changes video1 or video2. Check properly.
+3.) Go to the gscam  ros link follow for initialisatioon: http://wiki.ros.org/gscam
+	roscd gscam
+	cd bin
+	export GSCAM_CONFIG="v4l2src device=/dev/video2 ! video/x-raw-rgb,framerate=30/1 ! ffmpegcolorspace"
+	rosrun gscam gscam
+4.) to view the camera 
+	Check camera topics by: $ rostopic list 
+	$ rosrun image_view image_view image:=/gscam/image_raw
+5.)to initiate the ar_recog package     
+	$ roscd ar_recog/bin
+	$ rosrun ar_recog ar_recog image:=/gscam/image_raw
+6.)Once it starts to run in a new terminal
+	$ rosrun image_view image_view image:=/ar/image
+The camera starts detecting the tags
+7.)Launch the drrobot
+	$ roslaunch drrobot_jaguar4x4_player drrobot_play1-y.launch 
+8.)Launch the noland package 
+	$ rosrun noland3d nolan.py
+9.)The jaguar should start following the tag placed in front of it.
+Kempaii!!
+
+
